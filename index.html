@@ -98,6 +98,7 @@
             deployApp(currentMode);
             initCanvasAnimation();
             initTabSwitcher();
+            initChat();
         };
 
         function initTabSwitcher() {
@@ -109,6 +110,36 @@
                     const mode = tab.getAttribute('data-type');
                     deployApp(mode);
                 });
+            });
+        }
+
+        function initChat() {
+            const sendBtn = document.querySelector('.send-btn');
+            const textarea = document.querySelector('textarea');
+
+            sendBtn.addEventListener('click', () => {
+                const script = textarea.value;
+                if (!script.trim()) return;
+
+                if (window.ggbApplet) {
+                    // Convert # comments to // for GeoGebra compatibility
+                    const processedScript = script.replace(/#/g, '//');
+                    try {
+                        ggbApplet.evalCommand(processedScript);
+                        // Optional: Clear textarea after sending
+                        // textarea.value = '';
+                    } catch (e) {
+                        console.error("GGB Script Error:", e);
+                    }
+                }
+            });
+
+            // Allow Ctrl/Cmd + Enter to send
+            textarea.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    sendBtn.click();
+                }
             });
         }
 
