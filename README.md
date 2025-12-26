@@ -1,28 +1,92 @@
-# Math100 — AI GeoGebra Graphing Calculator
+# MathBest — AI GeoGebra Graphing Calculator
 
-Math100 is a premium, AI-powered GeoGebra graphing calculator platform. It integrates various GeoGebra perspectives with a modern, glassmorphic UI and an interactive AI chat interface.
+MathBest is a modern, web-based mathematics platform that combines the power of GeoGebra with a premium, glassmorphic user interface. Built with **React** and **Vite**, it offers a seamless experience for graphing, geometry, and 3D calculations, augmented by an AI-styled assistant interface.
 
-## Features
+## 🚀 Technologies
 
-- **Multi-Perspective GeoGebra**: Switch between Graphing, 3D Calculator, Geometry, and CAS modes.
-- **Premium Design**: Modern aesthetic using CSS glassmorphism, gradients, and custom branding.
-- **AI-Powered Commands**: Execute complex GeoGebra scripts directly from the AI chat input.
-- **Interactive Sidebar**: Real-time geometric animations and a polished chat interface.
-- **Export Functionality**: Easily export your work (PNG, JPG, SVG, GGB).
+- **Core Framework**: [React 18](https://reactjs.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/) - Fast HMR and optimized builds.
+- **Mathematics Engine**: [GeoGebra Web API](https://www.geogebra.org/wiki/en/Reference:GeoGebra_Apps_API)
+- **Styling**: Vanilla CSS3 with advanced features (CSS Variables, Glassmorphism, Animations).
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-## Technologies
+## 📂 Project Structure
 
-- HTML5 / CSS3 (Vanilla)
-- GeoGebra Web API
-- Canvas API (for sidebar animations)
-- Integrated branding assets
+```bash
+ladr-geogebra/
+├── index.html              # Application entry point (injects GeoGebra script)
+├── vite.config.js          # Vite configuration
+├── package.json            # Dependencies and scripts
+├── src/
+│   ├── main.jsx            # React root
+│   ├── App.jsx             # Main layout component
+│   ├── index.css           # Global styles and CSS variables
+│   └── components/
+│       ├── TopBar.jsx      # Navigation and mode switcher
+│       ├── Sidebar.jsx     # AI Assistant chat interface
+│       ├── GGBApplet.jsx   # React wrapper for GeoGebra applet
+│       └── CanvasAnimation.jsx # Decorative animation for the sidebar
+└── legacy_backup/          # Backup of the original HTML/CSS version
+```
 
-## Getting Started
+## ✨ Features
 
-Simply open `index.html` in any modern web browser to start using the calculator.
+- **Multi-Mode Calculator**: Switch instantly between:
+    - 📈 **Graphing**: Standard function plotting.
+    - 🧊 **3D Calculator**: 3D surfaces and objects.
+    - 📐 **Geometry**: Interactive Euclidean geometry.
+    - 🧮 **CAS**: Computer Algebra System for symbolic math.
+- **AI Assistant Interface**:
+    - A Sidebar styled as an AI chat functionality.
+    - **Command Execution**: Directly execute GeoGebra commands (e.g., `f(x) = x^2`, `Polygon(...)`) through the chat input.
+    - **Interactive Suggestions**: Quick-start prompts for common mathematical tasks.
+- **Premium UI/UX**:
+    - Dark mode by default with Glassmorphism effects.
+    - Specialized animations (Canvas-based spider-web network) in the welcome card.
+    - Responsive layout handling GeoGebra resize events automatically.
 
-## Usage Tips
+## 🛠️ Usage
 
-- Use the top navigation tabs to switch between calculator modes.
-- Enter GeoGebra commands or scripts in the AI input area on the right.
-- Use `Cmd + Enter` (Mac) or `Ctrl + Enter` (Windows/Linux) to quickly execute scripts from the text area.
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+Start the local development server:
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:5173` to see the app.
+
+### Building for Production
+
+Create an optimized build in the `dist/` directory:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## 📝 Notes
+
+- **GeoGebra Injection**: The app loads the GeoGebra deploy script from `https://www.geogebra.org/apps/deployggb.js` in `index.html`. Ensure you have internet access to load this resource.
+- **Command Syntax**: The AI input currently accepts direct GeoGebra commands. Separate multiple commands with newlines.
+
+---
+
+*Powered by DeepSeek & GeoGebra*
