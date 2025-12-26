@@ -1,6 +1,6 @@
-# MathBest — AI GeoGebra Graphing Calculator
+# Ladr GeoGebra — AI GeoGebra Graphing Calculator
 
-MathBest is a modern, web-based mathematics platform that combines the power of GeoGebra with a premium, glassmorphic user interface. Built with **React** and **Vite**, it offers a seamless experience for graphing, geometry, and 3D calculations, augmented by an AI-styled assistant interface.
+Ladr GeoGebra is a modern, web-based mathematics platform that combines the power of GeoGebra with a premium, glassmorphic user interface. Built with **React** and **Vite**, it offers a seamless experience for graphing, geometry, and 3D calculations, augmented by an AI-styled assistant interface.
 
 ## 🚀 Technologies
 

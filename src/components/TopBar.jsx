@@ -13,7 +13,7 @@ export default function TopBar({ currentMode, onModeChange }) {
     return (
         <div className="top-bar">
             <div className="logo-section">
-                <h1>Math Best</h1>
+                <h1>Ladr-GeoGebra</h1>
             </div>
 
             <nav className="nav-tabs">
