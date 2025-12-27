@@ -22,7 +22,7 @@ const GGBApplet = ({ mode }) => {
             "perspective": perspective,
             "width": 800, // Initial, but overridden by setSize
             "height": 600,
-            "showToolBar": true,
+            "showToolBar": false,
             "showAlgebraInput": true,
             "showMenuBar": true,
             "enableRightClick": true,

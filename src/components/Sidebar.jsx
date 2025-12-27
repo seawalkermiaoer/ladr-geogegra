@@ -10,14 +10,15 @@ export default function Sidebar() {
         if (!inputValue.trim()) return;
 
         // Send to GeoGebra
-        const script = inputValue;
         if (window.ggbApplet) {
-            const processedScript = script.replace(/#/g, '//');
+            // Suppress error dialogs
+            window.ggbApplet.setErrorDialogsActive(false);
 
             try {
-                const lines = processedScript.split('\n');
+                const lines = inputValue.split('\n');
                 lines.forEach(line => {
-                    const cmd = line.trim();
+                    // Filter out comments starting with // or #
+                    const cmd = line.replace(/(\/\/|#).*/, '').trim();
                     if (cmd) {
                         console.log("Executing GGB command:", cmd);
                         window.ggbApplet.evalCommand(cmd);
@@ -32,7 +33,7 @@ export default function Sidebar() {
     };
 
     const handleKeyDown = (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             handleSend();
         }
