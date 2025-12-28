@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, Calculator, Box, Triangle, FunctionSquare } from 'lucide-react';
+import { Download, Calculator, Box, Triangle, FunctionSquare, LogOut } from 'lucide-react';
 import './TopBar.css';
 
 const TABS = [
@@ -9,7 +9,7 @@ const TABS = [
     { id: 'cas', label: 'CAS', icon: Calculator },
 ];
 
-export default function TopBar({ currentMode, onModeChange }) {
+export default function TopBar({ currentMode, onModeChange, onLogout }) {
     return (
         <div className="top-bar">
             <div className="logo-section">
@@ -33,9 +33,10 @@ export default function TopBar({ currentMode, onModeChange }) {
             </nav>
 
             <div className="user-actions">
-                <div className="dropdown">
-
-                </div>
+                <button className="logout-btn" onClick={onLogout} title="退出登录">
+                    <LogOut size={16} />
+                    <span>退出</span>
+                </button>
             </div>
         </div>
     );

@@ -10,12 +10,12 @@ export default function Login({ onLogin }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Get environment variables or fallback to defaults for local dev
-        // __APP_USERNAME__ and __APP_PASSWORD__ are replaced by Vite during build
-        const safeUsername = (typeof __APP_USERNAME__ !== 'undefined' && __APP_USERNAME__) ? __APP_USERNAME__ : 'admin';
-        const safePassword = (typeof __APP_PASSWORD__ !== 'undefined' && __APP_PASSWORD__) ? __APP_PASSWORD__ : 'password';
+        // Strictly check against environment variables
+        // If enviroment variables are not set, login will fail
+        const validUsername = (typeof __APP_USERNAME__ !== 'undefined' && __APP_USERNAME__);
+        const validPassword = (typeof __APP_PASSWORD__ !== 'undefined' && __APP_PASSWORD__);
 
-        if (username === safeUsername && password === safePassword) {
+        if (validUsername && validPassword && username === validUsername && password === validPassword) {
             onLogin();
         } else {
             alert("账号或密码错误");

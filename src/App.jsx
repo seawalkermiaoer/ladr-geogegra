@@ -15,7 +15,11 @@ function App() {
 
     return (
         <>
-            <TopBar currentMode={currentMode} onModeChange={setCurrentMode} />
+            <TopBar
+                currentMode={currentMode}
+                onModeChange={setCurrentMode}
+                onLogout={() => setIsLoggedIn(false)}
+            />
             <main style={{ display: 'flex', flex: 1, overflow: 'hidden', position: 'relative' }}>
                 <GGBApplet mode={currentMode} />
                 <Sidebar />
