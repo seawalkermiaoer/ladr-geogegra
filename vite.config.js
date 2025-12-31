@@ -11,6 +11,8 @@ export default defineConfig(({ mode }) => {
         define: {
             '__APP_USERNAME__': JSON.stringify(env.USERNAME),
             '__APP_PASSWORD__': JSON.stringify(env.PASSWORD),
+            'process.env.DASHSCOPE_API_KEY': JSON.stringify(env.DASHSCOPE_API_KEY),
+            'process.env.APP_ID': JSON.stringify(env.APP_ID),
         }
     }
 })
