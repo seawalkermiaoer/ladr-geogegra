@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import OpenAI from 'openai';
+import { SYSTEM_PROMPT } from '../prompts/systemPrompt';
 import { Send, Sparkles, User, Bot, Loader2 } from 'lucide-react';
 import axios from 'axios';
 import CanvasAnimation from './CanvasAnimation';
@@ -68,6 +70,47 @@ export default function Sidebar() {
         }
     };
 
+
+    const callNvidiaAI = async (prompt) => {
+        const apiKey = process.env.NVIDIA_API_KEY;
+
+        if (!apiKey) {
+            console.warn("NVIDIA_API_KEY not found, falling back or erroring.");
+            return { error: 'NVIDIA API Key not configured.' };
+        }
+
+        const openai = new OpenAI({
+            apiKey: apiKey,
+            baseURL: 'https://integrate.api.nvidia.com/v1',
+            dangerouslyAllowBrowser: true
+        });
+
+        try {
+            const completion = await openai.chat.completions.create({
+                model: "minimaxai/minimax-m2",
+                messages: [
+                    { role: "system", content: SYSTEM_PROMPT },
+                    { role: "user", content: prompt }
+                ],
+                temperature: 1,
+                top_p: 0.95,
+                max_tokens: 8192,
+                stream: true
+            });
+
+            let fullText = '';
+            for await (const chunk of completion) {
+                fullText += chunk.choices[0]?.delta?.content || '';
+            }
+
+            return { text: fullText };
+
+        } catch (error) {
+            console.error('Nvidia AI Error:', error);
+            return { error: error.message };
+        }
+    };
+
     const handleSend = async () => {
         if (!inputValue.trim() || isLoading) return;
 
@@ -85,7 +128,8 @@ export default function Sidebar() {
         setIsLoading(true);
         setMessages(prev => [...prev, { role: 'user', content: currentInput, type: 'instruction' }]);
 
-        const result = await callDashScope(currentInput);
+        // const result = await callDashScope(currentInput);
+        const result = await callNvidiaAI(currentInput);
         setIsLoading(false);
 
         if (result.error) {

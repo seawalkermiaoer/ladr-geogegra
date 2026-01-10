@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
             '__APP_PASSWORD__': JSON.stringify(env.PASSWORD),
             'process.env.DASHSCOPE_API_KEY': JSON.stringify(env.DASHSCOPE_API_KEY),
             'process.env.APP_ID': JSON.stringify(env.APP_ID),
+            'process.env.NVIDIA_API_KEY': JSON.stringify(env.NVIDIA_API_KEY),
         }
     }
 })
