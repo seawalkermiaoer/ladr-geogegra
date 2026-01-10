@@ -71,6 +71,27 @@ export default function Sidebar() {
     };
 
 
+    const callBackendAPI = async (prompt) => {
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: prompt })
+            });
+
+            if (!response.ok) {
+                 const errData = await response.json().catch(() => ({}));
+                 throw new Error(errData.error || `Server error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return { text: data.text };
+        } catch (error) {
+            console.error('Backend API Error:', error);
+            return { error: error.message };
+        }
+    };
+
     const callNvidiaAI = async (prompt) => {
         const apiKey = process.env.NVIDIA_API_KEY;
 
@@ -128,8 +149,9 @@ export default function Sidebar() {
         setIsLoading(true);
         setMessages(prev => [...prev, { role: 'user', content: currentInput, type: 'instruction' }]);
 
+        const result = await callDashScope(currentInput);
         // const result = await callDashScope(currentInput);
-        const result = await callNvidiaAI(currentInput);
+ 
         setIsLoading(false);
 
         if (result.error) {
